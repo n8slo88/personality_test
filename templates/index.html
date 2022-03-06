@@ -1,0 +1,66 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block styles %}
+  {{ super() }}
+    <link href="https://fonts.googleapis.com/css2?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/styles.css">
+
+{% endblock %}
+{% block title %}Personality Types Quiz{% endblock %}
+{% block content %}
+<body>
+<div class="wrapper">
+    <div class="top">
+        <div class="title"><h1>Personality Types Quiz</h1></div>
+{% if post_id < 2 %}
+        <div class="title">
+        <h1>Click Agree if the statement applies to you</h1>
+
+        </div>
+{% endif %}
+        </div>
+
+    </div>
+
+    <div>
+        <div class="content">
+            <div class="card ">
+                <div class="row">
+                <p> {{post_id}} of 233:   </p> <br><br>  <h4> {{ post }}</h4><br>
+                    {% if post_id < 233 %}
+
+                    <div class="col-lg-6">
+                  <form action="{{ url_for('start') }}" method="POST">
+                      <input type="submit" name="next" value="Agree">
+                  </form>
+                        </div>
+                    <div class="col-lg-6">
+                    <form action="{{ url_for('start') }}" >
+                      <input type="submit" name="next" value="Disagree">
+                   </form>
+                    </div>
+                {% endif %}
+                </div>
+             </div>
+        </div>
+
+        {% if post_id == 233 %}
+ <div class="content">
+            <div class="card ">
+                <div class="row">
+                <p> Phlegmatic: {{phlegscore}}</p><br>
+                    <p> Choleric: {{choscore}}</p><br>
+                    <p> Melancholic: {{melscore}}</p><br>
+                    <p> Sanguine: {{sanscore}}</p><br><br>
+                    <a class="btn btn-success" href="https://psychologia.co/four-temperaments/" target="_blank"  rel="noopener noreferrer">LEARN MORE</a>
+                </div>
+             </div>
+        </div>
+        {% endif %}
+     </div>
+</div>
+</body>
+<footer>
+    <p>Made with ♥ by <a href="http://www.kcofficepros.com"  style="color: white">KC OFFICE PROS</a></p>
+</footer>
+{% endblock %}
