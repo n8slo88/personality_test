@@ -5,7 +5,6 @@ import pandas
 df = pandas.read_csv(r'templates/questionstwo.csv')
 questions = df.to_dict(orient="index")
 
-
 app = Flask(__name__)
 Bootstrap(app)
 
