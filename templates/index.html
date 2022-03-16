@@ -4,6 +4,8 @@
   {{ super() }}
     <link href="https://fonts.googleapis.com/css2?family=Raleway" rel="stylesheet">
     <link rel="stylesheet" href="../static/css/styles.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
 
 {% endblock %}
 {% block title %}Personality Types Quiz{% endblock %}
@@ -11,54 +13,109 @@
 <body>
 <div class="wrapper">
     <div class="top">
-        <div class="title"><h1>Personality Types Quiz</h1></div>
-{% if post_id < 2 %}
-        <div class="title">
-        <h1>Click Agree if the statement applies to you</h1>
-
+        <div class="title"><h1>Personality Types Quiz</h1>
         </div>
+    </div>
+</div>
+
+<div class="content">
+    <div class="card ">
+        <div class="row">
+{% if onum == 0 %}
+        <div>
+            <p>Welcome,</p>
+            <p>This test takes approximately 10 minutes to complete. </p>
+            <p>There are a total of 233 questions</p>
+            <p>Your personality score will appear as you go</p>
+            <p>Upon completion you will be given a description of your personality type</p>
+        </div>
+            <div>
+                     <form action="{{ url_for('indexa') }}">
+                        <input type="submit" value="START">
+                      </form>
+            </div>
+{%  endif %}
+{% if onum == 1 %}
+            <div>
+                <p style="margin: 0; display: inline;"  id="post_id">Directions: <br>
+                    Click Agree if the statement applies to you<br>
+                    Click Disagree if the statement doesn't appy to you<br>
+                Click any button to continue:</p>
+                <p style="margin:0; display: inline;" align="right" id="output"></p>
+            </div>
+            <br>
+            <section id="button_title"></section>
+            <div class="col-lg-6">
+                      <form id="form_agree">
+                          <button type="submit" name="agree">Agree</button>
+                      </form>
+            </div>
+            <div class="col-lg-6">
+                      <form id="form_disagree">
+                        <button type="submit" name="disagree">Disagree</button>
+                      </form>
+            </div>
+            </section>
+            <br>
+            <div>
+                <div>
+                    <br>
+                <p style="margin: 0; display: inline;">Melancholic:</p>
+                <p style="margin:0; display: inline;" align="right" id="mscore"></p>
+                </div>
+                 <div>
+                    <br>
+                <p style="margin: 0; display: inline;">Sanguine:</p>
+                <p style="margin:0; display: inline;" align="right" id="sscore"></p>
+                </div>
+                <div>
+                    <br>
+                <p style="margin: 0; display: inline;">Phlegmatic:</p>
+                <p style="margin:0; display: inline;" align="right" id="pscore"></p>
+                </div>
+                <div>
+                    <br>
+                <p style="margin: 0; display: inline;">Choleric:</p>
+                <p style="margin:0; display: inline;" align="right" id="cscore"></p>
+                </div>
+            </div>
 {% endif %}
         </div>
-
     </div>
-
-    <div>
-        <div class="content">
-            <div class="card ">
-                <div class="row">
-                <p> {{post_id}} of 233:   </p> <br><br>  <h4> {{ post }}</h4><br>
-                    {% if post_id < 233 %}
-
-                    <div class="col-lg-6">
-                  <form action="{{ url_for('start') }}" method="POST">
-                      <input type="submit" name="next" value="Agree">
-                  </form>
-                        </div>
-                    <div class="col-lg-6">
-                    <form action="{{ url_for('start') }}" >
-                      <input type="submit" name="next" value="Disagree">
-                   </form>
-                    </div>
-                {% endif %}
-                </div>
-             </div>
-        </div>
-
-        {% if post_id == 233 %}
- <div class="content">
-            <div class="card ">
-                <div class="row">
-                <p> Phlegmatic: {{phlegscore}}</p><br>
-                    <p> Choleric: {{choscore}}</p><br>
-                    <p> Melancholic: {{melscore}}</p><br>
-                    <p> Sanguine: {{sanscore}}</p><br><br>
-                    <a class="btn btn-success" href="https://psychologia.co/four-temperaments/" target="_blank"  rel="noopener noreferrer">LEARN MORE</a>
-                </div>
-             </div>
-        </div>
-        {% endif %}
-     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function() {
+      $('#form_disagree').on('submit', function(e){
+        $.ajax({
+        type: 'POST',
+        url : '/a',
+        })
+           .done(function(data){
+          $('#output').text(data.output).show();
+          $('#post_id').text(data.post_id).show();
+          $('#score').text(data.score).show();
+        });
+        e.preventDefault();
+      });
+      $('#form_agree').on('submit',function(e){
+        $.ajax({
+          type : 'POST',
+          url : '/b',
+
+        })
+        .done(function(data){
+          $('#output').text(data.output).show();
+          $('#post_id').text(data.post_id).show();
+          $('#score').text(data.score).show();
+          $('#mscore').text(data.mscore).show();
+          $('#sscore').text(data.sscore).show();
+          $('#pscore').text(data.pscore).show();
+          $('#cscore').text(data.cscore).show();
+        });
+        e.preventDefault();
+      });
+    });
+</script>
 </body>
 <footer>
     <p>Made with ♥ by <a href="http://www.kcofficepros.com"  style="color: white">KC OFFICE PROS</a></p>

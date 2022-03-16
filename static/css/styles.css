@@ -5,6 +5,17 @@ body{
  -webkit-font-smoothing: antialiased;
   color:#212121;
 }
+
+button{
+margin: 5px
+}
+
+@media (max-width: 1028px){
+
+    #button_title{
+    text-align: center;
+    }
+}
 .wrapper{
   position: relative;
   clear:both;
@@ -69,3 +80,5 @@ footer {
   color: white;
   text-align: center;
 }
+
+
