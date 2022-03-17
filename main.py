@@ -154,11 +154,13 @@ def indexb():
 @app.route('/a', methods=['GET','POST'])
 def indexa():
      onum=1
+     post_id=num[0]
      if request.method == "POST":
         move_one()
-        post_id=num[0]
-        dato = dat()
-        return dato
+        output = questions[num[0]]['question']
+        post_id = num[0]
+        score=score_[0]
+        return {'output': output, 'post_id': post_id, 'score': score}
      return render_template('index.html', onum=onum)
 
 def move_one():
