@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, request, jsonify
 from flask_bootstrap import Bootstrap
-import pandas
+
 
 #df = pandas.read_csv(r'templates/questionstwo.csv')
 #questions = df.to_dict(orient="index")
