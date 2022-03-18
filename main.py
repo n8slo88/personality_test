@@ -47,6 +47,7 @@ def move_one():
     ques_int=num[0]
     new_num=ques_int+1
     num[0] = new_num
+    return num[0]
 
 
 @app.route('/')
