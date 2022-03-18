@@ -195,13 +195,6 @@ def s_plus():
     new_score = score_int + 1
     sscore_[0] = new_score
 
-def dat():
-    firstname = questions[num[0]]['question']
-    output = firstname
-    post_id = num[0]
-    score = score_[0]
-    return {'output': output, 'post_id': post_id, 'score': score}
-
 
 if __name__ == "__main__":
     app.run(debug=True)
