@@ -43,6 +43,12 @@ pscore_=[0]
 cscore_=[0]
 bnum=[0]
 
+def move_one():
+    ques_int=num[0]
+    new_num=ques_int+1
+    num[0] = new_num
+
+
 @app.route('/')
 def index():
      onum=bnum[0]
@@ -154,7 +160,6 @@ def indexb():
 @app.route('/a', methods=['GET','POST'])
 def indexa():
      onum=1
-     post_id=num[0]
      if request.method == "POST":
         move_one()
         output = questions[num[0]]['question']
@@ -163,10 +168,6 @@ def indexa():
         return {'output': output, 'post_id': post_id, 'score': score}
      return render_template('index.html', onum=onum)
 
-def move_one():
-    ques_int=num[0]
-    new_num=ques_int+1
-    num[0] = new_num
 
 def schore():
     score_int = score_[0]
